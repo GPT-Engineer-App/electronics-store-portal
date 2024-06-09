@@ -1,4 +1,4 @@
-import { Box, Button, Container, Flex, Grid, Heading, IconButton, Image, Link, Text, VStack, Input } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Grid, Heading, IconButton, Image, Link, Text, VStack, Input, Select } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 
