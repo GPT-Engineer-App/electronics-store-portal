@@ -1,4 +1,5 @@
-import { Box, Button, Container, Flex, Grid, Heading, IconButton, Image, Link, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Grid, Heading, IconButton, Image, Link, Text, VStack, Input } from "@chakra-ui/react";
+import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 
 const sampleProducts = [
@@ -9,6 +10,15 @@ const sampleProducts = [
 ];
 
 const Index = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredProducts = sampleProducts.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   return (
     <Container maxW="container.xl" p={0}>
       {/* Navigation Bar */}
@@ -19,6 +29,15 @@ const Index = () => {
           <Link href="#" mx={2}>Products</Link>
           <Link href="#" mx={2}>About</Link>
           <Link href="#" mx={2}>Contact</Link>
+          <Input
+            placeholder="Search products"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            ml={4}
+            bg="white"
+            color="black"
+            width={{ base: "100px", md: "200px" }}
+          />
         </Flex>
         <IconButton aria-label="Cart" icon={<FaShoppingCart />} />
       </Flex>
@@ -33,7 +52,7 @@ const Index = () => {
       <Box as="section" py={10}>
         <Heading size="lg" mb={6} textAlign="center">Featured Products</Heading>
         <Grid templateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap={6}>
-          {sampleProducts.map(product => (
+          {filteredProducts.map(product => (
             <Box key={product.id} borderWidth="1px" borderRadius="lg" overflow="hidden" p={4} textAlign="center">
               <Image src={product.image} alt={product.name} mb={4} />
               <Text fontWeight="bold">{product.name}</Text>
