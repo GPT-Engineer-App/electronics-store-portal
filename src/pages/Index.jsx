@@ -1,18 +1,58 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Grid, Heading, IconButton, Image, Link, Text, VStack } from "@chakra-ui/react";
+import { FaShoppingCart } from "react-icons/fa";
 
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+const sampleProducts = [
+  { id: 1, name: "Smartphone", price: "$699", image: "https://via.placeholder.com/150" },
+  { id: 2, name: "Laptop", price: "$999", image: "https://via.placeholder.com/150" },
+  { id: 3, name: "Smartwatch", price: "$199", image: "https://via.placeholder.com/150" },
+  { id: 4, name: "Headphones", price: "$299", image: "https://via.placeholder.com/150" },
+];
 
 const Index = () => {
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
-      </VStack>
+    <Container maxW="container.xl" p={0}>
+      {/* Navigation Bar */}
+      <Flex as="nav" align="center" justify="space-between" p={4} bg="gray.800" color="white">
+        <Heading size="md">ElectroShop</Heading>
+        <Flex>
+          <Link href="#" mx={2}>Home</Link>
+          <Link href="#" mx={2}>Products</Link>
+          <Link href="#" mx={2}>About</Link>
+          <Link href="#" mx={2}>Contact</Link>
+        </Flex>
+        <IconButton aria-label="Cart" icon={<FaShoppingCart />} />
+      </Flex>
+
+      {/* Hero Section */}
+      <Box as="section" bg="gray.200" py={20} textAlign="center">
+        <Image src="https://via.placeholder.com/800x300" alt="Featured Product" mx="auto" mb={4} />
+        <Button colorScheme="teal" size="lg">Shop Now</Button>
+      </Box>
+
+      {/* Product Listings */}
+      <Box as="section" py={10}>
+        <Heading size="lg" mb={6} textAlign="center">Featured Products</Heading>
+        <Grid templateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap={6}>
+          {sampleProducts.map(product => (
+            <Box key={product.id} borderWidth="1px" borderRadius="lg" overflow="hidden" p={4} textAlign="center">
+              <Image src={product.image} alt={product.name} mb={4} />
+              <Text fontWeight="bold">{product.name}</Text>
+              <Text>{product.price}</Text>
+              <Button colorScheme="teal" mt={2}>Add to Cart</Button>
+            </Box>
+          ))}
+        </Grid>
+      </Box>
+
+      {/* Footer */}
+      <Box as="footer" bg="gray.800" color="white" py={10} textAlign="center">
+        <Flex justify="center" mb={4}>
+          <Link href="#" mx={2}>Facebook</Link>
+          <Link href="#" mx={2}>Twitter</Link>
+          <Link href="#" mx={2}>Instagram</Link>
+        </Flex>
+        <Text>&copy; 2023 ElectroShop. All rights reserved.</Text>
+      </Box>
     </Container>
   );
 };
